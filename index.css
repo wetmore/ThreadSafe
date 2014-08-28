@@ -7,21 +7,51 @@
   margin: 5px 10px;
 }
 
-#id-form {
-  display: none;
+#login-wrapper {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  background-image: url('img/ajax-loader.gif');
+  background-repeat: no-repeat;
+  background-position-x: center;
 }
 
-#card {
+#login-stuff {
+  visibility: hidden;
+  margin: 0 auto;
+}
+
+#id-form {
+  visibility: hidden;
+}
+
+#intro-bg {
+  z-index: 10;
+  position: relative;
+  padding-top: 40px;
+}
+
+.card {
   box-sizing: border-box;
+  position: relative;
   width: 600px;
   margin: 0 auto;
   -moz-box-shadow: 0px 4px 27px 0px rgba(0,0,0,0.37);
   box-shadow: 0px 4px 27px 0px rgba(0,0,0,0.37);
   text-align: center;
   padding: 20px 50px;
-  margin-top: 40px;
+  background-color: white;
+}
+
+#how {
+  transform: translateY(-460px);
+  transition: transform 0.4s ease-out 0s;
 }
 
 #status {
   margin-top: 10px;
+}
+
+body, #intro-bg {
+  background-color: #3B5999;
 }
