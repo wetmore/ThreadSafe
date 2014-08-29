@@ -1,10 +1,10 @@
 .comment {
-  border: 1px solid red;
   margin: 5px 0;
 }
 
 .message {
   margin: 5px 10px;
+  overflow: scroll;
 }
 
 #login-wrapper {
@@ -38,14 +38,28 @@
   margin: 0 auto;
   -moz-box-shadow: 0px 4px 27px 0px rgba(0,0,0,0.37);
   box-shadow: 0px 4px 27px 0px rgba(0,0,0,0.37);
-  text-align: center;
   padding: 20px 50px;
   background-color: white;
+}
+
+.centered {
+  text-align: center;
 }
 
 #how {
   transform: translateY(-460px);
   transition: transform 0.4s ease-out 0s;
+}
+
+#question {
+  transform: translateY(-530px);
+  transition: transform 0.4s ease-out 0s;
+  z-index: 5;
+}
+
+#comments {
+  transform: translateY(-530px);
+  padding-top: 40px;
 }
 
 #status {
@@ -54,4 +68,21 @@
 
 body, #intro-bg {
   background-color: #3B5999;
+}
+
+.name {
+  padding: 5px 0 10px 0;
+}
+
+.downloads a {
+  padding: 0 10px 0 10px;
+}
+
+#error {
+  position: absolute;
+  left: 0;
+  background-color: #ee3322;
+  color: white;
+  transform: translateY(-630px);
+  transition: transform 0.7s ease 0s;
 }

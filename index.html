@@ -21,7 +21,7 @@
     if (response.status === 'connected') {
       document.getElementById('id-form').style.visibility = 'visible';
       document.getElementById('login-wrapper').style.display = 'none';
-      document.getElementById('how').style.transform = 'initial';
+      showHow();
       // Logged into your app and Facebook.
     } else if (response.status === 'not_authorized') {
       document.getElementById('login-stuff').style.visibility = 'visible';
@@ -85,7 +85,7 @@
   the FB.login() function when clicked.
 -->
 <div id="intro-bg">
-  <div class="card">
+  <div class="centered card">
     <h1>ThreadSafe</h1>
     <p>View Facebook group comment threads in an easy-to-copy format, or download them as JSON or plaintext.</p>
     <div id="login-wrapper">
@@ -102,31 +102,33 @@
       <input type="submit" value="Grab">
     </form>
   </div>
-</div>
-<div id="how" class="card">
-    <div class="step">
-      <h3>Step 1</h3>
-      <img src="img/step1.png" height="54" width="123">
-      <p>Click the date of the post to go to its page.</p>
-    </div>
-    <div class="step">
-      <h3>Step 2</h3>
-      <img src="img/step2.png" height="34" width="225">
-      <p>Copy the post ID from the url.</p>
-    </div>
-    <div class="step">
-      <h3>Step 3</h3>
-      <p>Put your ID in that box (above).</p>
-    </div>
-  </div>
 
-<div class="card">
-  <div id="question">
-    <div id="author"></div>
-    <div id="question-message"></div>
-  </div>
-  <div id="comments"></div>
+  <div id="error" class="centered card">Invalid ID or something like that!</div>
 </div>
+
+<div id="how" class=" centered card">
+  <div class="step">
+    <h3>Step 1</h3>
+    <img src="img/step1.png" height="54" width="123">
+    <p>Click the date of the post to go to its page.</p>
+  </div>
+  <div class="step">
+    <h3>Step 2</h3>
+    <img src="img/step2.png" height="34" width="225">
+    <p>Copy the post ID from the url.</p>
+  </div>
+  <div class="step">
+    <h3>Step 3</h3>
+    <p>Put your ID in that box (above).</p>
+  </div>
+</div>
+
+<div id="question" class="card">
+  <div id="author" class="name"></div>
+  <div id="question-message"></div>
+</div>
+
+<div id="comments" class="card"></div>
 
 </body>
 </html>
