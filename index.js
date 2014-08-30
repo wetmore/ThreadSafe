@@ -28,6 +28,7 @@ function grabComments(id, after, prevArray, cb) {
         }
       } else {
         showError();
+        document.getElementById('submit').disabled = false;
       }
     }
   );
@@ -41,6 +42,7 @@ function grabPost(id, cb) {
         cb(response);
       } else {
         showError();
+        document.getElementById('submit').disabled = false;
       }
     }
   );
@@ -64,7 +66,9 @@ function collapse(commentsArray) {
 }
 
 function getCommentsFromID() {
+  var submit = document.getElementById('submit');
   var id = document.getElementById('id-entry').value;
+  submit.disabled = true;
 
   if (!id) {
     return false;
@@ -73,30 +77,31 @@ function getCommentsFromID() {
   hideComments();
   hideQuestion();
 
-  var addData = callbacker(2, function(data) {
-    console.log(data);
-    showComments(data, id);
-  });
-
-  grabPost(id, function(response) {
-    var qData = {
-      from: response.from.name,
-      message: response.message
-    }
-
-    addData({
-      question: qData
+  window.setTimeout(function() {
+    var addData = callbacker(2, function(data) {
+      showComments(data, id);
     });
-  
-    hideHow();
-    showQuestion(qData);
-  });
 
-  grabComments(id, '', [], function(arr) {
-    addData({
-      comments: collapse(arr)
+    grabPost(id, function(response) {
+      var qData = {
+        from: response.from.name,
+        message: response.message
+      }
+
+      addData({
+        question: qData
+      });
+    
+      hideHow();
+      showQuestion(qData);
     });
-  });
+
+    grabComments(id, '', [], function(arr) {
+      addData({
+        comments: collapse(arr)
+      });
+    });
+  }, 500);
 
   return false;
 }
@@ -110,19 +115,19 @@ function showQuestion(data) {
   document.getElementById('author').innerHTML = data.from;
   document.getElementById('question-message').innerHTML = data.message;
 
-  document.getElementById('question').style.transform = 'translateY(-417px)';
+  document.getElementById('question').classList.add('is-shown');
 }
 
 function hideQuestion() {
-  document.getElementById('question').style.transform = 'translateY(-530px)';
+  document.getElementById('question').classList.remove('is-shown');
 }
 
 function showHow() {
-  document.getElementById('how').style.transform = 'initial';
+  document.getElementById('how').classList.add('is-shown');
 }
 
 function hideHow() {
-  document.getElementById('how').style.transform = 'translateY(-460px)';
+  document.getElementById('how').classList.remove('is-shown');
 }
 
 function showComments(data, id) {
@@ -158,7 +163,7 @@ function showComments(data, id) {
   container.appendChild(downloads);
 
   if (data.comments.length == 0) {
-    container.innerHTML += 'No comments';
+    container.innerHTML += 'No comments :(';
   }
 
   _.each(data.comments, function(comment) {
@@ -184,22 +189,25 @@ function showComments(data, id) {
   });
 
   // set bottom of comments div to be above question div
-  var h = container.offsetHeight;
-  var offset = -(530 + h);
+  var offset = -(40 + container.offsetHeight);
   container.style.transition = 'transform 0s';
   container.style.transform = 'translateY(' + offset + 'px)';
   window.setTimeout(function() {
+    var offset = document.getElementById('question').offsetHeight;
     // make comments div visible and set translate to show them
     container.style.transition = 'transform 0.5s ease-out 0s';
     container.style.visibility = 'visible';
-    container.style.transform = 'translateY(-430px)';
+    container.style.transform = 'translateY(' + offset + 'px)';
   }, 200);
+  window.setTimeout(function() {
+    document.getElementById('submit').disabled = false;
+    document.getElementById('comments').focus();
+  }, 700);
 }
 
 function hideComments() {
   var container = document.getElementById('comments');
-  var h = container.offsetHeight;
-  var offset = -(530 + h);
+  var offset = -(40 + container.offsetHeight);
   container.style.transition = 'transform 0.5s ease-out 0s';
   container.style.transform = 'translateY(' + offset + 'px)';
 }
@@ -213,8 +221,8 @@ function toPlaintext(data) {
 
 function showError() {
   var error =  document.getElementById('error');
-  error.style.transform = 'translateY(-533px)';
+  error.classList.add('is-shown');
   window.setTimeout(function() {
-    error.style.transform = 'translateY(-630px)';
+    error.classList.remove('is-shown');
   }, 1500);
 }
