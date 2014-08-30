@@ -68,12 +68,12 @@ function collapse(commentsArray) {
 function getCommentsFromID() {
   var submit = document.getElementById('submit');
   var id = document.getElementById('id-entry').value;
-  submit.disabled = true;
 
   if (!id) {
     return false;
   }
 
+  submit.disabled = true;
   hideComments();
   hideQuestion();
 

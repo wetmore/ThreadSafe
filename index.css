@@ -37,6 +37,7 @@ body {
 
 #intro-bg .card {
   margin: 0 auto;
+  padding-bottom: 40px;
 }
 
 .card {
@@ -54,8 +55,9 @@ body {
 }
 
 #how {
-  transform: translateY(-460px);
+  transform: translateY(-480px);
   transition: transform 0.4s ease-out 0s;
+  padding-bottom: 30px;
 }
 
 #question {
@@ -67,6 +69,7 @@ body {
   transform: translateY(-130px);
   padding-top: 30px;
   margin-bottom: 40px;
+  padding-bottom: 30px;
 }
 
 #status {
